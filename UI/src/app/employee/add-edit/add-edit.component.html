@@ -23,14 +23,22 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
                     <mat-label>Department</mat-label>
-                    <input matInput name="department" formControlName="department" required>
+                    <mat-select formControlName="department" required placeholder="Department">
+                        <mat-option *ngFor="let department of departmentDDL" [value]="department.departmentId">
+                            {{department.departmentName}}
+                          </mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
     
             <div fxLayout="row" fxLayoutAlign="space-between">
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
                     <mat-label>Gender</mat-label>
-                    <input matInput name="gender" formControlName="gender" required>
+                    <mat-select formControlName="gender" required placeholder="Gender">
+                        <mat-option *ngFor="let gender of genderDDL" [value]="gender.genderId">
+                            {{gender.genderName}}
+                          </mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
                     <mat-label>Phone Number</mat-label>

@@ -1,10 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Inject} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { MatFormField } from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import { Employee } from 'src/app/model/Employee.model';
 import { employeeService } from 'src/app/service/employee.service';
+import { department,gender} from 'src/app/model/Employee.model';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-list',
@@ -17,6 +20,9 @@ export class ListComponent implements OnInit {
   employeeData:Employee[]=[]
   displayedColumns: string[] = ['employeeId', 'name', 'city', 'department', 'gender', 'phoneNumber', 'Actions'];
   dataSource!: MatTableDataSource<any>;
+  genderDDL!: gender[];
+  departmentDDL!: department[];
+
   // @ViewChild(MatPaginator)
   // paginator!: MatPaginator;
   // @ViewChild(MatSort)
@@ -39,8 +45,9 @@ export class ListComponent implements OnInit {
 
   constructor(
     private _employeeService: employeeService,
-    private router: Router
+    private router: Router,
     ) { 
+      this.getDDL();
     }
 
   ngOnInit(): void {
@@ -68,9 +75,31 @@ export class ListComponent implements OnInit {
       )
   }
 
-  editButton(id:number){
+  editButton(id:number){  
     this.router.navigateByUrl('/employee/addedit/'+id);
   }
+
+  deleteButton(id: number){
+  if(confirm('Are you sure you want to delete?')){
+    this._employeeService.deleteData(id).subscribe(Result => {
+    this.loadAllEmployee();
+    this._employeeService.openSnackBar('The record has been deleted','OK');
+    });
+  }
+  }
+
+  getDDL(){
+    return this._employeeService.getDDL().subscribe((response) => {
+        this.genderDDL = response.genderDDL;
+        this.departmentDDL = response.departmentDDL;
+      },
+      (error) => {
+        // Hide the splash screen
+        //this._notifyService.showError(error, "Error")
+      });
+  }
+
+
 
   // deleteRow(id: number) {
   //   this._employeeService.delete(id).subscribe(Result => {
@@ -82,7 +111,6 @@ export class ListComponent implements OnInit {
   //     }
   //   );
   // }
-  
 
 
 }

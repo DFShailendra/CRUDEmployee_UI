@@ -2,12 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError ,retry} from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
-import { Observable, ErrorObserver } from 'rxjs';
+import { Observable,ErrorObserver } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Employee } from '../model/Employee.model';
+import { getDDL } from './../model/Employee.model';
+import { MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+
 @Injectable({ providedIn: 'root' })
 export class employeeService {
-    constructor(private _httpClient: HttpClient) { }
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+    constructor(private _httpClient: HttpClient,
+      private snackBar:MatSnackBar) { }
     // Role: Role;
     data: any;
     // Http Headers
@@ -17,7 +23,7 @@ export class employeeService {
         })
     }
     getAll() {
-        return this._httpClient.get<Employee[]>(environment.baseUrl + '/Employee')
+        return this._httpClient.get<Employee[]>(environment.baseUrl + '/employee')
             .pipe(
                 catchError((err) => {
                     console.error(err);
@@ -26,12 +32,22 @@ export class employeeService {
             )
     }
 
+    getDDL() {
+      return this._httpClient.get<getDDL>(environment.baseUrl + '/employee/getDDL')
+          .pipe(
+              catchError((err) => {
+                  console.error(err);
+                  return throwError(err);    //Rethrow it back to component
+              })
+          )
+  }
+
+
     getById(Id: number) {
-        return this._httpClient.get<Employee>(environment.baseUrl + '/Employee/' + Id);
+        return this._httpClient.get<Employee>(environment.baseUrl + '/employee/' + Id);
     }
 
     SaveDetails(employee:Employee): Observable<Employee> {
-        debugger;
         // return this._httpClient.post(environment.baseUrl + '/EmailQueue', employee, this.httpOptions);
         return this._httpClient
         .post<Employee>(
@@ -63,12 +79,33 @@ export class employeeService {
     //     return this._httpClient.put(environment.baseUrl + '/EmailQueue', emailqueue, this.httpOptions);
     // }
 
-    delete(Id: number) {
-        return this._httpClient.delete(environment.baseUrl + '/Employee/' + Id);
-    }
+    // deleteData(Id: number) {
+    //   debugger;
+    //   return this._httpClient.delete<Employee>(environment.baseUrl + '/employee/' + Id,this.httpOptions).pipe(catchError(this.handleError));
+    // }
 
+  //   deleteData(Id: number) {
+  //     return this._httpClient.delete<Employee>(environment.baseUrl + '/employee/' + Id);
+  // }
+
+  deleteData(Id: number) {
+    // return this._httpClient.post(environment.baseUrl + '/EmailQueue', employee, this.httpOptions);
+    return this._httpClient
+    .delete<Employee>(
+        environment.baseUrl  + '/Employee/'+ Id,
+      this.httpOptions
+    )
+    .pipe(retry(1), catchError(this.handleError));
+}
+
+openSnackBar(message: string, action: string){
+  this.snackBar.open(message,action,{
+    horizontalPosition: this.horizontalPosition,
+    verticalPosition: this.verticalPosition,
+  });
+}
     // getByStatusId(StatusId: number) {
-    //     return this._httpClient.get<emailqueue[]>(environment.baseUrl + '/EmailQueue/GetByStatusId?StatusId=' + StatusId);
+    //     return this._httpClient.get<emailqueue[]>(environment.base Url + '/EmailQueue/GetByStatusId?StatusId=' + StatusId);
     // }
 
 }

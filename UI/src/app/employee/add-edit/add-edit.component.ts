@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Employee } from 'src/app/model/Employee.model';
+import { Employee,gender,department } from 'src/app/model/Employee.model';
 import { employeeService } from 'src/app/service/employee.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
@@ -14,11 +14,15 @@ export class AddEditComponent implements OnInit {
   employee!: Employee;
   EmployeeForm!: FormGroup;
   pageType!: string;
+  genderDDL! : gender[];
+  departmentDDL! : department[];
+
   constructor(private _formBuilder: FormBuilder,
     private _route: ActivatedRoute,
     private _router: Router,
     private _employeeService: employeeService,) { 
     this.employee=new Employee(this.employee);
+    this.getDDL();
   }
   get f(): { [key: string]: AbstractControl } {
     return this.EmployeeForm.controls;
@@ -72,12 +76,12 @@ export class AddEditComponent implements OnInit {
     const data = this.EmployeeForm.getRawValue();
     this._employeeService.SaveDetails(data).subscribe(Result => {
       
-      // if (Result.ClientId == 0){
-      //   this._notifyService.showSuccess(data.ClientName + " saved successfully", "Success")
-      // }
-      // else{
-      //   this._notifyService.showSuccess(data.ClientName + " updated successfully", "Success")
-      // }
+     if(this.pageType == 'new'){
+         this._employeeService.openSnackBar('The record has been added','OK');
+      }
+       else{
+        this._employeeService.openSnackBar('The record has been edited','OK');
+       }
       this._router.navigate(["/employee/list"]);
     },
       error => {
@@ -86,6 +90,17 @@ export class AddEditComponent implements OnInit {
 
       }
     );
+  }
+
+  getDDL(){
+    return this._employeeService.getDDL().subscribe((response) => {
+        this.genderDDL = response.genderDDL;
+        this.departmentDDL = response.departmentDDL;
+      },
+      (error) => {
+        // Hide the splash screen
+        //this._notifyService.showError(error, "Error")
+      });
   }
 
 }

@@ -25,3 +25,37 @@ export class Employee{
         this.phoneNumber=employee?.phoneNumber || 0;
     }
 }
+
+export class gender{
+    public genderId: number;
+    public genderName: string;
+    public isActive: number;
+
+    constructor(gender: gender) {
+        this.genderId=gender?.genderId || 0;
+        this.genderName=gender?.genderName || '';
+        this.isActive=gender?.isActive || 0;
+    }
+}
+
+export class department{
+    public departmentId: number;
+    public departmentName: string;
+    public isActive: number;
+
+    constructor(department: department) {
+        this.departmentId=department?.departmentId || 0;
+        this.departmentName=department?.departmentName || '';
+        this.isActive=department?.isActive || 0;
+    }
+}
+
+export class getDDL{
+    genderDDL: gender[];
+    departmentDDL: department[];
+    
+    constructor(getddl:getDDL) {
+        this.genderDDL = getddl?.genderDDL || [];
+        this.departmentDDL = getddl?.departmentDDL || [];
+    }
+}
