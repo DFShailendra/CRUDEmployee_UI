@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Employee,gender,department, RRF, resource } from 'src/app/model/Employee.model';
+import { Employee,gender, RRF, DDL } from 'src/app/model/Employee.model';
 import { employeeService } from 'src/app/service/employee.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MatDatepicker } from '@angular/material/datepicker';
@@ -15,8 +15,8 @@ export class AddEditComponent implements OnInit {
   RRFForm!: FormGroup;
   pageType!: string;
   genderDDL! : gender[];
-  departmentDDL! : department[];
-  resourceDDL!: resource[];
+  departmentDDL! : DDL[];
+  resourceDDL!: DDL[];
 
   constructor(private _formBuilder: FormBuilder,
     private _route: ActivatedRoute,
@@ -113,8 +113,8 @@ export class AddEditComponent implements OnInit {
   }
 
   getDDL(){
-    return this._employeeService.getDDL().subscribe((response) => {
-        this.resourceDDL = response.resourceDDL;
+    return this._employeeService.getDDL().subscribe((Result) => {
+        this.resourceDDL = Result.resources;
       },
       (error) => {
         // Hide the splash screen

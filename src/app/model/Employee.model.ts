@@ -105,15 +105,6 @@ export class gender{
     }
 }
 
-export class resource{
-    public resourceId:number;
-    public resourceName:string;
-    constructor(resource: resource) {
-        this.resourceId=resource?.resourceId || 0;
-        this.resourceName=resource?.resourceName|| '';
-        }
-}
-
 export class department{
     public departmentId: number;
     public departmentName: string;
@@ -126,15 +117,25 @@ export class department{
     }
 }
 
+
+export class DDL{
+    public id:number;
+    public value:string;
+    constructor(ddl: DDL) {
+        this.id=ddl?.id || 0;
+        this.value=ddl?.value|| '';
+        }
+}
+
 export class getDDL{
     genderDDL: gender[];
     departmentDDL: department[];
-    resourceDDL!: resource[];
+    resources!: DDL[];
 
     constructor(getddl:getDDL) {
         this.genderDDL = getddl?.genderDDL || [];
         this.departmentDDL = getddl?.departmentDDL || [];
-        this.resourceDDL = getddl?.resourceDDL|| [];
+        this.resources = getddl?.resources|| [];
 
     }
 }

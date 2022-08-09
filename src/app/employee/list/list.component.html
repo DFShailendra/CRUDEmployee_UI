@@ -6,20 +6,21 @@
 
   <mat-card>
     <h5 class="card-title">RRF Records</h5>
-    <div class="grid-item">
-    <div fxLayout="row" fxLayoutAlign="space-between" class="grid-container">
-      <mat-form-field appearance="outline" floatLabel="always" fxFlex="79" class="grid-item">
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <mat-form-field appearance="outline" floatLabel="always" fxFlex="80">
         <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Search the table here" #input appearance="fill">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input appearance="fill">
       </mat-form-field>
-    </div>
-    <div class="grid-item">
-        <button type="button" appearance="outline" fxFlex="49" class="btn btn-outline-info" [routerLink]="'/employee/addedit/'+0">Add RRF</button>
+
+      <div class="pt-4" fxFlex="19">
+        <button type="button" class="btn btn-outline-info" [routerLink]="'/employee/addedit/'+0">Add RRF</button>
       </div>
+
     </div>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 text-center">
-      <ng-container matColumnDef="RRFId" >
+      <ng-container matColumnDef="RRFId">
         <th mat-header-cell *matHeaderCellDef class="text-center"> Serial No. </th>
         <td mat-cell *matCellDef="let element; let i = index;" class="text-center"> {{i+1}} </td>
       </ng-container>

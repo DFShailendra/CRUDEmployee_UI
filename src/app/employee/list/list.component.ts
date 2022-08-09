@@ -4,9 +4,9 @@ import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatFormField } from '@angular/material/form-field';
 import { Router } from '@angular/router';
-import { Employee, resource, RRF } from 'src/app/model/Employee.model';
+import { Employee,  RRF } from 'src/app/model/Employee.model';
 import { employeeService } from 'src/app/service/employee.service';
-import { department,gender} from 'src/app/model/Employee.model';
+import { department,gender,DDL} from 'src/app/model/Employee.model';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -21,7 +21,7 @@ export class ListComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   genderDDL!: gender[];
   departmentDDL!: department[];
-  resourceDDL!: resource[];
+  resourceDDL!: DDL[];
 
   // @ViewChild(MatPaginator)
   // paginator!: MatPaginator;

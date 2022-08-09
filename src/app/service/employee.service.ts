@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 import { Employee, RRF } from '../model/Employee.model';
 import { getDDL } from './../model/Employee.model';
 import { MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { resource } from 'src/app/model/Employee.model';
+import { DDL } from 'src/app/model/Employee.model';
 
 @Injectable({ providedIn: 'root' })
 export class employeeService {
