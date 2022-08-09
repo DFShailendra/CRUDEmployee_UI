@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatFormField } from '@angular/material/form-field';
 import { Router } from '@angular/router';
-import { Employee } from 'src/app/model/Employee.model';
+import { Employee, resource, RRF } from 'src/app/model/Employee.model';
 import { employeeService } from 'src/app/service/employee.service';
 import { department,gender} from 'src/app/model/Employee.model';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -16,12 +16,12 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 })
 export class ListComponent implements OnInit {
 
-  Data: any = [];
-  employeeData:Employee[]=[]
-  displayedColumns: string[] = ['employeeId', 'name', 'city', 'department', 'gender', 'phoneNumber', 'Actions'];
+  RRFData:RRF[]=[]
+  displayedColumns: string[] = ['RRFId', 'ManagerId', 'ClientId', 'ProjectId', 'RoleId','Actions'];
   dataSource!: MatTableDataSource<any>;
   genderDDL!: gender[];
   departmentDDL!: department[];
+  resourceDDL!: resource[];
 
   // @ViewChild(MatPaginator)
   // paginator!: MatPaginator;
@@ -47,26 +47,22 @@ export class ListComponent implements OnInit {
     private _employeeService: employeeService,
     private router: Router,
     ) { 
-      this.getDDL();
+      //this.getDDL();
     }
 
   ngOnInit(): void {
-    this.loadAllEmployee();
+    this.loadAllRRFRecords();
   }
 
   
-  loadAllEmployee() {
+  loadAllRRFRecords() {
     this._employeeService.getAll()
     .subscribe((response) => {
-        if (response.length == 0) {
-          //this._notifyService.showInfo('No record found.', "Info");
-        }
-        else {
-          this.employeeData = response;
-          this.Data = response;
-          this.dataSource = new MatTableDataSource(this.employeeData);
+        // if (response.length == 0) {
+        //   //this._notifyService.showInfo('No record found.', "Info");
+          this.RRFData = response;
+          this.dataSource = new MatTableDataSource(this.RRFData);
           this.dataSource.paginator = this.paginator;
-        }
         },
         (error) => {
           // Hide the splash screen
@@ -82,7 +78,7 @@ export class ListComponent implements OnInit {
   deleteButton(id: number){
   if(confirm('Are you sure you want to delete?')){
     this._employeeService.deleteData(id).subscribe(Result => {
-    this.loadAllEmployee();
+    this.loadAllRRFRecords();
     this._employeeService.openSnackBar('The record has been deleted','OK');
     });
   }

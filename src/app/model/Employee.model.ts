@@ -26,6 +26,73 @@ export class Employee{
     }
 }
 
+export class RRF{
+    public rrfId: number;
+    public managerId:number;
+    public clientId:number;
+    public projectId:number;
+    public submissionDate: Date;
+    public roleId:number; 
+    public isBillable:number; 
+    public billingRate:number; 
+    public billingStartDate:Date; 
+    public positionTypeId:number; 
+    public isInternalResourceId:number; 
+    public identifiedResourceId:number;  
+    public numberOfPositionId:number; 
+    public payroleTypeId:number; 
+    public approvedByResourceId:number; 
+    public primaryTechnologies:string; 
+    public minimumYearsOfExperienceId:number;
+    public mandatorySkills:string;
+    public niceToHaveSkills:string;
+    public jobLocation:string;
+    public isRemotelyId:number;
+    public interviewByResourceId: number;
+    public jobDescription:string;
+    public otherInputs:string;
+    public remark: string;
+    public createBy: string;
+    public createDate: Date;
+    public updateBy: string;
+    public updateDate: Date;
+
+    /**
+     *
+     */
+    constructor(rrf:RRF) {
+        this.rrfId=rrf?.rrfId || 0;
+        this.managerId=rrf?.managerId || 0;
+        this.projectId=rrf?.projectId || 0;
+        this.clientId=rrf?.clientId || 0;
+        this.submissionDate=rrf?.submissionDate|| '';
+        this.roleId=rrf?.roleId || 0;
+        this.isBillable=rrf?.isBillable || 0;
+        this.billingRate=rrf?.billingRate || 0;
+        this.billingStartDate=rrf?.billingStartDate|| '';
+        this.positionTypeId=rrf?.positionTypeId || 0;
+        this.isInternalResourceId=rrf?.isInternalResourceId || 0;
+        this.identifiedResourceId=rrf?.identifiedResourceId || 0;
+        this.numberOfPositionId=rrf?.numberOfPositionId || 0;
+        this.payroleTypeId=rrf?.payroleTypeId|| 0;
+        this.approvedByResourceId=rrf?.approvedByResourceId|| 0;
+        this.primaryTechnologies=rrf?.primaryTechnologies|| '';
+        this.minimumYearsOfExperienceId=rrf?.minimumYearsOfExperienceId|| 0;
+        this.mandatorySkills=rrf?.mandatorySkills|| '';
+        this.niceToHaveSkills=rrf?.niceToHaveSkills|| '';
+        this.jobLocation=rrf?.jobLocation|| '';
+        this.isRemotelyId=rrf?.isRemotelyId|| 0;
+        this.interviewByResourceId=rrf?.interviewByResourceId|| 0;
+        this.jobDescription=rrf?.jobDescription|| '';
+        this.otherInputs=rrf?.otherInputs|| '';
+        this.remark=rrf?.remark|| '';
+        this.createBy=rrf?.createBy|| '';
+        this.createDate=rrf?.createDate|| '';
+        this.updateBy=rrf?.updateBy|| '';
+        this.updateDate=rrf?.updateDate|| '';
+    }
+}
+
 export class gender{
     public genderId: number;
     public genderName: string;
@@ -36,6 +103,15 @@ export class gender{
         this.genderName=gender?.genderName || '';
         this.isActive=gender?.isActive || 0;
     }
+}
+
+export class resource{
+    public resourceId:number;
+    public resourceName:string;
+    constructor(resource: resource) {
+        this.resourceId=resource?.resourceId || 0;
+        this.resourceName=resource?.resourceName|| '';
+        }
 }
 
 export class department{
@@ -53,9 +129,12 @@ export class department{
 export class getDDL{
     genderDDL: gender[];
     departmentDDL: department[];
-    
+    resourceDDL!: resource[];
+
     constructor(getddl:getDDL) {
         this.genderDDL = getddl?.genderDDL || [];
         this.departmentDDL = getddl?.departmentDDL || [];
+        this.resourceDDL = getddl?.resourceDDL|| [];
+
     }
 }

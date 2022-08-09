@@ -7,12 +7,13 @@ import { AppComponent } from './app.component';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { ListComponent } from './employee/list/list.component';
 import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
 BrowserAnimationsModule,
@@ -22,7 +23,11 @@ BrowserAnimationsModule,
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

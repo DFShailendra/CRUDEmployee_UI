@@ -1,37 +1,15 @@
 <div class="container  text-center mt-5 mb-5 bg-gray">
     <mat-card>
         <div  *ngIf="pageType ==='edit'">
-            <h5 class="card-title">Edit Employee Details</h5>
+            <h5 class="card-title">Edit RRF Record</h5>
         </div>
         <div  *ngIf="pageType ==='new'">
-            <h5 class="card-title">Add Employee Details</h5>
+            <h5 class="card-title">Add RRF Record</h5>
         </div>
         
-        <form class="card-body p-24" [formGroup]="EmployeeForm">
+        <form class="card-body p-24" [formGroup]="RRFForm">
             <div fxLayout="row" fxLayoutAlign="space-between">
-                <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
-                    <mat-label>Employee Name</mat-label>
-                    <input matInput name="name" formControlName="name" required>
-                    <mat-error *ngIf="errorHandling('name', 'required')" class="text-danger">
-                        <mat-icon>warning</mat-icon>
-                        You must provide a <strong>name</strong> 
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
-                    <mat-label>City</mat-label>
-                    <input matInput name="city" formControlName="city" required>
-                </mat-form-field>
-                <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
-                    <mat-label>Department</mat-label>
-                    <mat-select formControlName="department" required placeholder="Department">
-                        <mat-option *ngFor="let department of departmentDDL" [value]="department.departmentId">
-                            {{department.departmentName}}
-                          </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-    
-            <div fxLayout="row" fxLayoutAlign="space-between">
+                            <!-- <div fxLayout="row" fxLayoutAlign="space-between">
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
                     <mat-label>Gender</mat-label>
                     <mat-select formControlName="gender" required placeholder="Gender">
@@ -40,18 +18,147 @@
                           </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
-                    <mat-label>Phone Number</mat-label>
-                    <input matInput name="phoneNumber" formControlName="phoneNumber">
+            </div> -->
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                    <mat-label>ManagerId</mat-label>
+                    <mat-select name="managerId" formControlName="ManagerId" required>
+                        <mat-option *ngFor="let resource of resourceDDL" [value]="resource.resourceId">
+                            {{resource.resourceName}}
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
-            </div>
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                    <mat-label>ClientId</mat-label>
+                    <input matInput type="number" name="ClientId" formControlName="ClientId" required>
+                    <mat-error *ngIf="errorHandling('ClientId', 'required')" class="text-danger">
+                        <mat-icon>warning</mat-icon>
+                        You must provide a <strong>name</strong> 
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                    <mat-label>ProjectId</mat-label>
+                    <input matInput type="number" name="ProjectId" formControlName="ProjectId" required>
+                    <mat-error *ngIf="errorHandling('ProjectId', 'required')" class="text-danger">
+                        <mat-icon>warning</mat-icon>
+                        You must provide a <strong>name</strong> 
+                    </mat-error>
+                </mat-form-field>
+                <!-- <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                    <mat-label>Department</mat-label>
+                    <mat-select formControlName="department" required placeholder="Department">
+                        <mat-option *ngFor="let department of departmentDDL" [value]="department.departmentId">
+                            {{department.departmentName}}
+                          </mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>SubmissionDate</mat-label>
+                <input matInput [matDatepicker]="picker" name="SubmissionDate" formControlName="SubmissionDate" required>
+                <mat-hint>MM/DD/YY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>RoleId</mat-label>
+                <input matInput name="roleId" type="number" formControlName="RoleId" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>IsBillable</mat-label>
+                <input matInput name="IsBillable" type="number" formControlName="IsBillable" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>BillingRate</mat-label>
+                <input matInput name="BillingRate" type="number" formControlName="BillingRate" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>BillingStartDate</mat-label>
+                <input matInput [matDatepicker]="picker2" name="BillingStartDate" formControlName="BillingStartDate" required>
+                <mat-hint>MM/DD/YY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>PositionTypeId</mat-label>
+                <input matInput type="number" name="PositionTypeId" formControlName="PositionTypeId" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>IsInternalResourceId</mat-label>
+                <input matInput type="number" name="IsInternalResourceId" formControlName="IsInternalResourceId" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>IdentifiedResourceId</mat-label>
+                <input matInput type="number" name="IdentifiedResourceId" formControlName="IdentifiedResourceId" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>NumberOfPositionId</mat-label>
+                <input matInput type="number" name="NumberOfPositionId" formControlName="NumberOfPositionId" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>PayroleTypeId</mat-label>
+                <input matInput type="number" name="PayroleTypeId" formControlName="PayroleTypeId" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>ApprovedByResourceId</mat-label>
+                <input matInput type="number" name="ApprovedByResourceId" formControlName="ApprovedByResourceId" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>PrimaryTechnologies</mat-label>
+                <input matInput name="PrimaryTechnologies" formControlName="PrimaryTechnologies" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>MinimumYearsOfExperienceId</mat-label>
+                <input matInput type="number" name="MinimumYearsOfExperienceId" formControlName="MinimumYearsOfExperienceId" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>MandatorySkills</mat-label>
+                <input matInput name="MandatorySkills" formControlName="MandatorySkills" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>NiceToHaveSkills</mat-label>
+                <input matInput name="NiceToHaveSkills" formControlName="NiceToHaveSkills" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>JobLocation</mat-label>
+                <input matInput name="JobLocation" formControlName="JobLocation" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>IsRemotelyId</mat-label>
+                <input matInput type="number" name="IsRemotelyId" formControlName="IsRemotelyId" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>InterviewByResourceId</mat-label>
+                <input matInput type="number" name="InterviewByResourceId" formControlName="InterviewByResourceId" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>JobDescription</mat-label>
+                <input matInput name="JobDescription" formControlName="JobDescription" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>OtherInputs</mat-label>
+                <input matInput name="OtherInputs" formControlName="OtherInputs" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
+                <mat-label>Remark</mat-label>
+                <input matInput name="Remark" formControlName="Remark" required>
+            </mat-form-field>
+        </div>
+            <!-- <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>Gender</mat-label>
+                    <mat-select formControlName="gender" required placeholder="Gender">
+                        <mat-option *ngFor="let gender of genderDDL" [value]="gender.genderId">
+                            {{gender.genderName}}
+                          </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div> -->
 
             <div fxLayout="row" fxLayoutAlign="space-between">
                 <div fxFlex="75" >
 
                 </div>
                 <div fxFlex="14" fxLayout="row" fxLayoutAlign="space-between">
-                    <button type="button" class="btn btn-outline-success" (click)="SaveEmployeeDetails()">Save</button>
+                    <button type="button" class="btn btn-outline-success" (click)="SaveRRFRecordDetails()">Save</button>
                     <button type="button" class="btn btn-outline-danger" [routerLink]="'/employee/list/'">Cancel</button>
                     
                 </div>

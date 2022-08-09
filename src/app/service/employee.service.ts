@@ -4,9 +4,10 @@ import { catchError ,retry} from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { Observable,ErrorObserver } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Employee } from '../model/Employee.model';
+import { Employee, RRF } from '../model/Employee.model';
 import { getDDL } from './../model/Employee.model';
 import { MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { resource } from 'src/app/model/Employee.model';
 
 @Injectable({ providedIn: 'root' })
 export class employeeService {
@@ -23,7 +24,7 @@ export class employeeService {
         })
     }
     getAll() {
-        return this._httpClient.get<Employee[]>(environment.baseUrl + '/employee')
+        return this._httpClient.get<RRF[]>(environment.baseUrl + '/rrf')
             .pipe(
                 catchError((err) => {
                     console.error(err);
@@ -33,7 +34,7 @@ export class employeeService {
     }
 
     getDDL() {
-      return this._httpClient.get<getDDL>(environment.baseUrl + '/employee/getDDL')
+      return this._httpClient.get<getDDL>(environment.baseUrl + '/rrf/getDDL')
           .pipe(
               catchError((err) => {
                   console.error(err);
@@ -44,15 +45,15 @@ export class employeeService {
 
 
     getById(Id: number) {
-        return this._httpClient.get<Employee>(environment.baseUrl + '/employee/' + Id);
+        return this._httpClient.get<RRF>(environment.baseUrl + '/rrf/' + Id);
     }
 
-    SaveDetails(employee:Employee): Observable<Employee> {
+    SaveDetails(rrf:RRF): Observable<RRF> {
         // return this._httpClient.post(environment.baseUrl + '/EmailQueue', employee, this.httpOptions);
         return this._httpClient
-        .post<Employee>(
-            environment.baseUrl  + '/Employee',
-          JSON.stringify(employee),
+        .post<RRF>(
+            environment.baseUrl  + '/rrf',
+          JSON.stringify(rrf),
           this.httpOptions
         )
         .pipe(retry(1), catchError(this.handleError));
@@ -91,8 +92,8 @@ export class employeeService {
   deleteData(Id: number) {
     // return this._httpClient.post(environment.baseUrl + '/EmailQueue', employee, this.httpOptions);
     return this._httpClient
-    .delete<Employee>(
-        environment.baseUrl  + '/Employee/'+ Id,
+    .delete<RRF>(
+        environment.baseUrl  + '/rrf/'+ Id,
       this.httpOptions
     )
     .pipe(retry(1), catchError(this.handleError));

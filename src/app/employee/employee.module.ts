@@ -13,14 +13,15 @@ import { MatIconModule } from '@angular/material/icon'
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
     ListComponent,
-    AddEditComponent
+    AddEditComponent,
   ],
   imports: [
-  CommonModule,
+    CommonModule,
     EmployeeRoutingModule,
     MatTableModule,
     MatFormFieldModule,
@@ -30,7 +31,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ReactiveFormsModule,
     MatCardModule,
     MatPaginatorModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
   ]
 })
 export class EmployeeModule { }

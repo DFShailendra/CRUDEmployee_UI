@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Employee,gender,department } from 'src/app/model/Employee.model';
+import { Employee,gender,department, RRF, resource } from 'src/app/model/Employee.model';
 import { employeeService } from 'src/app/service/employee.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-
+import { MatDatepicker } from '@angular/material/datepicker';
 @Component({
   selector: 'app-add-edit',
   templateUrl: './add-edit.component.html',
@@ -11,24 +11,25 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class AddEditComponent implements OnInit {
   Id!: number;
-  employee!: Employee;
-  EmployeeForm!: FormGroup;
+  rrf!: RRF;
+  RRFForm!: FormGroup;
   pageType!: string;
   genderDDL! : gender[];
   departmentDDL! : department[];
+  resourceDDL!: resource[];
 
   constructor(private _formBuilder: FormBuilder,
     private _route: ActivatedRoute,
     private _router: Router,
     private _employeeService: employeeService,) { 
-    this.employee=new Employee(this.employee);
+    this.rrf = new RRF(this.rrf);
     this.getDDL();
   }
   get f(): { [key: string]: AbstractControl } {
-    return this.EmployeeForm.controls;
+    return this.RRFForm.controls;
   }
   ngOnInit(): void {
-    this.EmployeeForm = this.createForm();
+    this.RRFForm = this.createForm();
     this._route.params.forEach(
       (params: Params) => {
         this.Id = params["Id"];
@@ -41,46 +42,65 @@ export class AddEditComponent implements OnInit {
     else {
       // Hide the splash screen
       this.pageType = 'new';
-      this.EmployeeForm = this.createForm();
+      this.RRFForm = this.createForm();
     }
   }
 
   createForm(): FormGroup {
     return this._formBuilder.group({
-      employeeId: [this.employee.employeeId],
-      name: [this.employee.name,[Validators.required]],
-      city: [this.employee.city],
-      department: [this.employee.department],
-      gender: [this.employee.gender],
-      phoneNumber: [this.employee.phoneNumber,[Validators.required]]
+      RRFId: [this.rrf.rrfId],
+      ManagerId:[this.rrf.managerId,[Validators.required]],
+      ClientId:[this.rrf.clientId,[Validators.required]],
+      ProjectId:[this.rrf.projectId,[Validators.required]],
+      SubmissionDate: [this.rrf.submissionDate],
+      RoleId:[this.rrf.roleId],
+      IsBillable:[this.rrf.isBillable], 
+      BillingRate:[this.rrf.billingRate], 
+      BillingStartDate:[this.rrf.billingStartDate], 
+      PositionTypeId:[this.rrf.positionTypeId], 
+      IsInternalResourceId:[this.rrf.isInternalResourceId], 
+      IdentifiedResourceId:[this.rrf.identifiedResourceId],  
+      NumberOfPositionId:[this.rrf.numberOfPositionId], 
+      PayroleTypeId:[this.rrf.payroleTypeId], 
+      ApprovedByResourceId:[this.rrf.approvedByResourceId], 
+      PrimaryTechnologies:[this.rrf.primaryTechnologies],
+      MinimumYearsOfExperienceId:[this.rrf.minimumYearsOfExperienceId],
+      MandatorySkills:[this.rrf.mandatorySkills],
+      NiceToHaveSkills:[this.rrf.niceToHaveSkills],
+      JobLocation:[this.rrf.jobLocation],
+      IsRemotelyId:[this.rrf.isRemotelyId],
+      InterviewByResourceId: [this.rrf.interviewByResourceId],
+      JobDescription:[this.rrf.jobDescription],
+      OtherInputs:[this.rrf.otherInputs],
+      Remark: [this.rrf.remark],
     });
   }
 
   loadFromDetails() {
     this._employeeService.getById(this.Id).subscribe(Result => {
       if (Result == null) {
-        this.employee = new Employee(this.employee);
+        this.rrf = new RRF(this.rrf);
       }
       else {
-        this.employee = new Employee(Result);
+        this.rrf = new RRF(Result);
       }
       // Hide the splash screen
-      this.EmployeeForm = this.createForm();
+      this.RRFForm = this.createForm();
     });
   }
-  public errorHandling = (control: string, error: string) => {
-    return this.EmployeeForm.controls[control].hasError(error);
+  errorHandling = (control: string, error: string) => {
+    return this.RRFForm.controls[control].hasError(error);
   }
 
-  SaveEmployeeDetails(){
-    const data = this.EmployeeForm.getRawValue();
+  SaveRRFRecordDetails(){
+    const data = this.RRFForm.getRawValue();
     this._employeeService.SaveDetails(data).subscribe(Result => {
       
      if(this.pageType == 'new'){
-         this._employeeService.openSnackBar('The record has been added','OK');
+         this._employeeService.openSnackBar('The RRF record has been added','OK');
       }
        else{
-        this._employeeService.openSnackBar('The record has been edited','OK');
+        this._employeeService.openSnackBar('The RRF record has been edited','OK');
        }
       this._router.navigate(["/employee/list"]);
     },
@@ -94,8 +114,7 @@ export class AddEditComponent implements OnInit {
 
   getDDL(){
     return this._employeeService.getDDL().subscribe((response) => {
-        this.genderDDL = response.genderDDL;
-        this.departmentDDL = response.departmentDDL;
+        this.resourceDDL = response.resourceDDL;
       },
       (error) => {
         // Hide the splash screen
