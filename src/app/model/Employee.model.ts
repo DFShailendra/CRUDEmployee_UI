@@ -128,14 +128,28 @@ export class DDL{
 }
 
 export class getDDL{
-    genderDDL: gender[];
-    departmentDDL: department[];
     resources!: DDL[];
+    clients!:DDL[];
+    roles!:DDL[];
+    billables!:DDL[];
+    isInternalResource!:DDL[];
+    positionTypes!:DDL[];
+    numberOfPosition!:DDL[];
+    isRemotely!:DDL[];
+    minimumYearsOfExperience!:DDL[];
+    payroleType!:DDL[];
+
 
     constructor(getddl:getDDL) {
-        this.genderDDL = getddl?.genderDDL || [];
-        this.departmentDDL = getddl?.departmentDDL || [];
+        this.clients = getddl?.clients|| [];
         this.resources = getddl?.resources|| [];
-
+        this.roles = getddl?.roles|| [];
+        this.billables = getddl?.billables|| [];
+        this.isInternalResource = getddl?.isInternalResource|| [];
+        this.positionTypes = getddl?.positionTypes|| [];   
+        this.numberOfPosition = getddl?.numberOfPosition|| [];  
+        this.payroleType= getddl?.payroleType|| [];           
+        this.minimumYearsOfExperience = getddl?.minimumYearsOfExperience|| [];           
+        this.isRemotely = getddl?.isRemotely|| [];           
     }
 }

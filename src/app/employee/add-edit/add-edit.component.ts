@@ -17,6 +17,17 @@ export class AddEditComponent implements OnInit {
   genderDDL! : gender[];
   departmentDDL! : DDL[];
   resourceDDL!: DDL[];
+  clientDDL!: DDL[];
+  roleDDL!: DDL[];
+  billableDDL!: DDL[];
+  isinternalresourceDDL!:DDL[];
+  numberofpositionDDL!:DDL[];
+  positiontypesDDL!:DDL[];
+  payroletypesDDL!:DDL[];
+  minimumyearsofexperienceDDL!:DDL[];
+  isremotelyDDL!:DDL[];
+
+
 
   constructor(private _formBuilder: FormBuilder,
     private _route: ActivatedRoute,
@@ -115,6 +126,15 @@ export class AddEditComponent implements OnInit {
   getDDL(){
     return this._employeeService.getDDL().subscribe((Result) => {
         this.resourceDDL = Result.resources;
+        this.clientDDL = Result.clients;
+        this.roleDDL = Result.roles;
+        this.billableDDL = Result.billables;
+        this.numberofpositionDDL = Result.numberOfPosition;
+        this.isinternalresourceDDL = Result.isInternalResource;
+        this.positiontypesDDL = Result.positionTypes;
+        this.isremotelyDDL = Result.isRemotely;
+        this.minimumyearsofexperienceDDL = Result.minimumYearsOfExperience;
+        this.payroletypesDDL = Result.payroleType;
       },
       (error) => {
         // Hide the splash screen

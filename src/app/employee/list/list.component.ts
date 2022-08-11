@@ -86,8 +86,6 @@ export class ListComponent implements OnInit {
 
   getDDL(){
     return this._employeeService.getDDL().subscribe((response) => {
-        this.genderDDL = response.genderDDL;
-        this.departmentDDL = response.departmentDDL;
       },
       (error) => {
         // Hide the splash screen

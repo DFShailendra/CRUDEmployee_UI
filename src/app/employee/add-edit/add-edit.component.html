@@ -10,20 +10,20 @@
         <form class="card-body p-24" [formGroup]="RRFForm">
             <div fxLayout="row" fxLayoutAlign="space-between">
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
-                    <mat-label>ManagerId</mat-label>
+                    <mat-label>Manager</mat-label>
                     <mat-select name="managerId" formControlName="ManagerId" required>
-                        <mat-option *ngFor="let resource of resourceDDL" [value]="resource.id">
-                            {{resource.value}}
+                        <mat-option *ngFor="let element of resourceDDL" [value]="element.id">
+                            {{element.value}}                                                  
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
-                    <mat-label>ClientId</mat-label>
-                    <input matInput type="number" name="ClientId" formControlName="ClientId" required>
-                    <mat-error *ngIf="errorHandling('ClientId', 'required')" class="text-danger">
-                        <mat-icon>warning</mat-icon>
-                        You must provide a <strong>name</strong>
-                    </mat-error>
+                    <mat-label>Client</mat-label>
+                    <mat-select name="clientId" formControlName="ClientId" required>
+                        <mat-option *ngFor="let element of clientDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
                     <mat-label>ProjectId</mat-label>
@@ -45,12 +45,20 @@
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
-                    <mat-label>RoleId</mat-label>
-                    <input matInput name="roleId" type="number" formControlName="RoleId" required>
+                    <mat-label>Role</mat-label>
+                    <mat-select name="roleId" formControlName="RoleId" required>
+                        <mat-option *ngFor="let element of roleDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
                     <mat-label>IsBillable</mat-label>
-                    <input matInput name="IsBillable" type="number" formControlName="IsBillable" required>
+                    <mat-select name="billableId" formControlName="IsBillable" required>
+                        <mat-option *ngFor="let element of billableDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
 
@@ -69,38 +77,58 @@
                     <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
-                    <mat-label>PositionTypeId</mat-label>
-                    <input matInput type="number" name="PositionTypeId" formControlName="PositionTypeId" required>
+                    <mat-label>PositionType</mat-label>
+                    <mat-select name="positiontypeId" formControlName="PositionTypeId" required>
+                        <mat-option *ngFor="let positiontype of positiontypesDDL" [value]="positiontype.id">
+                            {{positiontype.value}}                                                  
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="space-between">
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
-                    <mat-label>IsInternalResourceId</mat-label>
-                    <input matInput type="number" name="IsInternalResourceId" formControlName="IsInternalResourceId"
-                        required>
+                    <mat-label>IsInternalResource</mat-label>
+                    <mat-select name="isInternalResource" formControlName="IsInternalResource" required>
+                        <mat-option *ngFor="let element of isinternalresourceDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
-                    <mat-label>IdentifiedResourceId</mat-label>
-                    <input matInput type="number" name="IdentifiedResourceId" formControlName="IdentifiedResourceId"
-                        required>
+                    <mat-label>IdentifiedResource</mat-label>
+                    <mat-select name="identifiedResource" formControlName="IdentifiedResource" required>
+                        <mat-option *ngFor="let element of resourceDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
-                    <mat-label>NumberOfPositionId</mat-label>
-                    <input matInput type="number" name="NumberOfPositionId" formControlName="NumberOfPositionId"
-                        required>
+                    <mat-label>NumberOfPosition</mat-label>
+                    <mat-select name="numberOfPosition" formControlName="NumberOfPositionId" required>
+                        <mat-option *ngFor="let position of numberofpositionDDL" [value]="position.id">
+                            {{position.value}}                                                  
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="space-between">
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
                     <mat-label>PayroleTypeId</mat-label>
-                    <input matInput type="number" name="PayroleTypeId" formControlName="PayroleTypeId" required>
+                    <mat-select name="isInternalResource" formControlName="IsInternalResource" required>
+                        <mat-option *ngFor="let element of payroletypesDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
                     <mat-label>ApprovedByResourceId</mat-label>
-                    <input matInput type="number" name="ApprovedByResourceId" formControlName="ApprovedByResourceId"
-                        required>
+                    <mat-select name="approvedByResourceId" formControlName="ApprovedByResourceId" required>
+                        <mat-option *ngFor="let element of resourceDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
                     <mat-label>PrimaryTechnologies</mat-label>
@@ -111,8 +139,11 @@
             <div fxLayout="row" fxLayoutAlign="space-between">
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
                     <mat-label>MinimumYearsOfExperienceId</mat-label>
-                    <input matInput type="number" name="MinimumYearsOfExperienceId"
-                        formControlName="MinimumYearsOfExperienceId" required>
+                    <mat-select name="minimumYearsOfExperience" formControlName="MinimumYearsOfExperienceId" required>
+                        <mat-option *ngFor="let element of minimumyearsofexperienceDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
                     <mat-label>MandatorySkills</mat-label>
@@ -131,12 +162,19 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
                     <mat-label>IsRemotelyId</mat-label>
-                    <input matInput type="number" name="IsRemotelyId" formControlName="IsRemotelyId" required>
+                    <mat-select name="isRemotelyId" formControlName="IsRemotelyId" required>
+                        <mat-option *ngFor="let element of isremotelyDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
                     <mat-label>InterviewByResourceId</mat-label>
-                    <input matInput type="number" name="InterviewByResourceId" formControlName="InterviewByResourceId"
-                        required>
+                    <mat-select name="interviewByResourceId" formControlName="InterviewByResourceId" required>
+                        <mat-option *ngFor="let element of resourceDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
 
