@@ -17,7 +17,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 export class ListComponent implements OnInit {
 
   RRFData:RRF[]=[]
-  displayedColumns: string[] = ['RRFId', 'ManagerId', 'ClientId', 'ProjectId', 'RoleId','ApprovedByResourceId','InterviewByResourceId','Actions'];
+  displayedColumns: string[] = ['RRFId', 'ClientId', 'ProjectId', 'RoleId','ManagerId','ApprovedByResourceId','InterviewByResourceId','Actions'];
   dataSource!: MatTableDataSource<any>;
   genderDDL!: gender[];
   departmentDDL!: department[];
