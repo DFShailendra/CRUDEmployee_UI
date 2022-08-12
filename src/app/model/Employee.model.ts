@@ -57,6 +57,13 @@ export class RRF{
     public updateBy: string;
     public updateDate: Date;
 
+    public managerName:string;
+    public clientName:string;
+    public projectName:string;
+    public approvalManager:string;
+    public interviewManager:string;
+    public roleName:string;
+
     /**
      *
      */
@@ -90,6 +97,12 @@ export class RRF{
         this.createDate=rrf?.createDate|| '';
         this.updateBy=rrf?.updateBy|| '';
         this.updateDate=rrf?.updateDate|| '';
+        this.managerName=rrf?.managerName|| '';
+        this.clientName=rrf?.clientName|| '';
+        this.projectName=rrf?.projectName|| '';
+        this.approvalManager=rrf?.approvalManager|| '';
+        this.interviewManager=rrf?.interviewManager|| '';
+        this.roleName=rrf?.roleName|| '';
     }
 }
 
