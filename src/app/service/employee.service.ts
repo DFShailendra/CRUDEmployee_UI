@@ -34,7 +34,7 @@ export class employeeService {
     }
 
     getDDL() {
-      return this._httpClient.get<getDDL>(environment.baseUrl + '/rrf/getDDL')
+        return this._httpClient.get<getDDL>(environment.baseUrl + '/rrf/getDDL')
           .pipe(
               catchError((err) => {
                   console.error(err);
@@ -42,6 +42,18 @@ export class employeeService {
               })
           )
   }
+  
+  getProjectDDL(Id:number) {
+    return this._httpClient.get<getDDL>(environment.baseUrl + '/rrf/getProjectDDL/'+JSON.stringify(Id))
+      .pipe(
+          catchError((err) => {
+              console.error(err);
+              return throwError(err);    //Rethrow it back to component
+          })
+      )
+}
+
+
 
 
     getById(Id: number) {

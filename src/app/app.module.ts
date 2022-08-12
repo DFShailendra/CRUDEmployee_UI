@@ -14,7 +14,6 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     HttpClientModule,
     MatSnackBarModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]

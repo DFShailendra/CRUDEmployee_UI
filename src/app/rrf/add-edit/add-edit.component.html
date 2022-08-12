@@ -1,0 +1,245 @@
+<div class="container  text-center mt-5 mb-5 bg-gray">
+    <mat-card>
+        <div *ngIf="pageType ==='edit'">
+            <h5 class="card-title">Edit RRF Record</h5>
+        </div>
+        <div *ngIf="pageType ==='new'">
+            <h5 class="card-title">Add RRF Record</h5>
+        </div>
+
+        <form class="card-body p-24" [formGroup]="RRFForm">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>What is the name of Requisition Manager?</mat-label>
+                    <mat-select name="managerId" formControlName="ManagerId" required>
+                        <mat-option *ngFor="let element of resourceDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>What is the Name of Client?</mat-label>
+                    <mat-select name="clientId" formControlName="ClientId" required (selectionChange)="getProjectDDL()">
+                        <mat-option *ngFor="let element of clientDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>Name of the Project for which this requisition is being raised</mat-label>
+                    <mat-select name="projectId" formControlName="ProjectId" required>
+                        <mat-option *ngFor="let element of projectDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>Date of submission of RRF</mat-label>
+                    <input matInput [matDatepicker]="picker" name="SubmissionDate" formControlName="SubmissionDate" placeholder="MM/DD/YYYY"
+                        required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                
+            </div>
+
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>What will be the Role of this candidate?</mat-label>
+                    <mat-select name="roleId" formControlName="RoleId" required>
+                        <mat-option *ngFor="let element of roleDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>
+                        Is this a billable or Non-billable opportunity</mat-label>
+                    <mat-select name="billableId" formControlName="IsBillable" required>
+                        <mat-option *ngFor="let element of billableDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>
+                        What is the monthly billing rate (INR/ USD)</mat-label>
+                    <input matInput name="BillingRate" type="number" formControlName="BillingRate" placeholder="Add billing rate" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>What is the approximate billing start date?</mat-label>
+                    <input matInput [matDatepicker]="picker2" name="BillingStartDate" formControlName="BillingStartDate" placeholder="MM/DD/YYYY"
+                        required>
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+                
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>
+                        What is the type of position?</mat-label>
+                    <mat-select name="positiontypeId" formControlName="PositionTypeId" required>
+                        <mat-option *ngFor="let positiontype of positiontypesDDL" [value]="positiontype.id">
+                            {{positiontype.value}}                                                  
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>Has the resource been identified internally?
+                    </mat-label>
+                    <mat-select name="isInternalResourceId" formControlName="IsInternalResourceId" required>
+                        <mat-option *ngFor="let element of isinternalresourceDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>What is the minimum number of years of experience that this candidate/s should have?
+                    </mat-label>
+                    <mat-select name="minimumYearsOfExperience" formControlName="MinimumYearsOfExperienceId" required>
+                        <mat-option *ngFor="let element of minimumyearsofexperienceDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>What are the MUST have (Mandatory) skills for this position?
+                    </mat-label>
+                    <input matInput name="MandatorySkills" formControlName="MandatorySkills" placeholder="Add mandatory skills" required>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>What are the nice to have (Not Mandatory) skills for this position:
+                    </mat-label>
+                    <input matInput name="NiceToHaveSkills" formControlName="NiceToHaveSkills" placeholder="Add nice to have skills" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>What is the name of the resource identified? (If already identified)
+                    </mat-label>
+                    <mat-select name="identifiedResource" formControlName="IdentifiedResourceId" required>
+                        <mat-option *ngFor="let element of resourceDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>How many positions are to be opened for this role?:
+                    </mat-label>
+                    <mat-select name="numberOfPosition" formControlName="NumberOfPositionId" required>
+                        <mat-option *ngFor="let element of numberofpositionDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>On whose payroll would the candidate be?
+                    </mat-label>
+                    <mat-select name="payroleType" formControlName="PayroleTypeId" required>
+                        <mat-option *ngFor="let element of payroletypesDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>Who has approved this requisition?
+                    </mat-label>
+                    <mat-select name="approvedByResourceId" formControlName="ApprovedByResourceId" required>
+                        <mat-option *ngFor="let element of resourceDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>What are the Primary technologies that you are looking for in the candidate/s ?
+                    </mat-label>
+                    <input matInput name="PrimaryTechnologies" formControlName="PrimaryTechnologies" placeholder="Add primary technologies" required>
+                </mat-form-field>
+                
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>What will be the location of posting (Job Location) for this position?
+                    </mat-label>
+                    <input matInput name="JobLocation" formControlName="JobLocation" required placeholder="Add job location">
+                </mat-form-field>
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>Can the candidate/s work remotely?
+                    </mat-label>
+                    <mat-select name="isRemotelyId" formControlName="IsRemotelyId" required>
+                        <mat-option *ngFor="let element of isremotelyDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>Who will be interviewing the candidates for this position?
+                    </mat-label>
+                    <mat-select name="interviewByResourceId" formControlName="InterviewByResourceId" required>
+                        <mat-option *ngFor="let element of resourceDDL" [value]="element.id">
+                            {{element.value}}                                                  
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>Please paste a detailed Job Description for this position
+                    </mat-label>
+                    <input matInput name="JobDescription" formControlName="JobDescription" required placeholder="Add job description">
+                </mat-form-field>
+                
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>Do you have any other inputs to be shared with Hiring team?
+                    </mat-label>
+                    <input matInput name="OtherInputs" formControlName="OtherInputs" required placeholder="Add other inputs">
+                </mat-form-field>
+                <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                    <mat-label>Enter any remarks to add to this RRF</mat-label>
+                    <input matInput name="Remark" formControlName="Remark" required placeholder="Add comments">
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <div fxFlex="75">
+                </div>
+                <div fxFlex="14" fxLayout="row" fxLayoutAlign="space-between">
+                    <button type="button" class="btn btn-outline-success" (click)="SaveRRFRecordDetails()">Save</button>
+                    <button type="button" class="btn btn-outline-danger"
+                        [routerLink]="'/rrf/list/'">Cancel</button>
+                </div>
+            </div>
+
+        </form>
+    </mat-card>
+
+</div>

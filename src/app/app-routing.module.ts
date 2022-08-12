@@ -4,8 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   
   {
-    path: 'employee',
-    loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule)
+    path: 'rrf',
+    loadChildren: () => import('./rrf/rrf.module').then(m => m.RrfModule)
   },
   
 ];
