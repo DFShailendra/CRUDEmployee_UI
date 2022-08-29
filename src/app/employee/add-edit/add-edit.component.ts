@@ -4,6 +4,8 @@ import { Employee,gender, RRF, DDL } from 'src/app/model/Employee.model';
 import { employeeService } from 'src/app/service/employee.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MatDatepicker } from '@angular/material/datepicker';
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-add-edit',
   templateUrl: './add-edit.component.html',
@@ -26,13 +28,14 @@ export class AddEditComponent implements OnInit {
   payroletypesDDL!:DDL[];
   minimumyearsofexperienceDDL!:DDL[];
   isremotelyDDL!:DDL[];
-
+  selectedDate:any = this.datePipe.transform(new Date(),"yyyy-MM-dd")
 
 
   constructor(private _formBuilder: FormBuilder,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _employeeService: employeeService,) { 
+    private _employeeService: employeeService,
+    private datePipe:DatePipe) { 
     this.rrf = new RRF(this.rrf);
     this.getDDL();
   }

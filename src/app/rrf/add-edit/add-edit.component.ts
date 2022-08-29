@@ -30,6 +30,8 @@ export class AddEditComponent implements OnInit {
   minimumyearsofexperienceDDL!:DDL[];
   isremotelyDDL!:DDL[];
   projectDDL!:DDL[];
+  mandatorySkillsDDL!:DDL[];
+  niceToHaveSkillsDDL!:DDL[];
 
 
   constructor(private _formBuilder: FormBuilder,
@@ -107,8 +109,19 @@ export class AddEditComponent implements OnInit {
     return this.RRFForm.controls[control].hasError(error);
   }
 
+  stringToArray(array:string){
+    return array.split(',');
+  }
+
+  arrayToString(array:string[]){
+    return array.toString();
+  }
+
   SaveRRFRecordDetails(){
+    
     const data = this.RRFForm.getRawValue();
+    data.mandatorySkills = this.arrayToString(data.mandatorySkills); 
+    
     this._employeeService.SaveDetails(data).subscribe(Result => {
       
      if(this.pageType == 'new'){
@@ -139,6 +152,8 @@ export class AddEditComponent implements OnInit {
         this.isremotelyDDL = Result.isRemotely;
         this.minimumyearsofexperienceDDL = Result.minimumYearsOfExperience;
         this.payroletypesDDL = Result.payroleType;
+        this.mandatorySkillsDDL = Result.mandatorySkills;
+        this.niceToHaveSkillsDDL = Result.niceToHaveSkills;
       },
       (error) => {
         // Hide the splash screen

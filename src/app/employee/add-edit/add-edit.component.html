@@ -38,7 +38,7 @@
             <div fxLayout="row" fxLayoutAlign="space-between">
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
                     <mat-label>SubmissionDate</mat-label>
-                    <input matInput [matDatepicker]="picker" name="SubmissionDate" formControlName="SubmissionDate" placeholder="MM/DD/YYYY"
+                    <input type="date" matInput [matDatepicker]="picker" name="SubmissionDate" formControlName="SubmissionDate" [(ngModel)]="selectedDate"
                         required>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -145,6 +145,9 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">
                     <mat-label>MandatorySkills</mat-label>
+                    <mat-select formControlName="">
+
+                    </mat-select>
                     <input matInput name="MandatorySkills" formControlName="MandatorySkills" required>
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always" fxFlex="33">

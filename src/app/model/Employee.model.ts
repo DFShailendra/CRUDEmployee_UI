@@ -152,7 +152,8 @@ export class getDDL{
     minimumYearsOfExperience!:DDL[];
     payroleType!:DDL[];
     project!:DDL[];
-
+    mandatorySkills!:DDL[];
+    niceToHaveSkills!:DDL[];
 
     constructor(getddl:getDDL) {
         this.clients = getddl?.clients|| [];
@@ -165,6 +166,9 @@ export class getDDL{
         this.payroleType= getddl?.payroleType|| [];           
         this.minimumYearsOfExperience = getddl?.minimumYearsOfExperience|| [];           
         this.isRemotely = getddl?.isRemotely|| [];   
-        this.project = getddl?.project|| [];           
+        this.project = getddl?.project|| [];   
+        this.mandatorySkills= getddl?.mandatorySkills|| [];  
+        this.niceToHaveSkills= getddl?.niceToHaveSkills|| [];           
+
     }
 }
