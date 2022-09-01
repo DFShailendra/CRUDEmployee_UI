@@ -35,7 +35,7 @@ export class RRF{
     public roleId:number; 
     public isBillable:number; 
     public billingRate:number; 
-    public billingStartDate:Date; 
+    public billingStartDate: Date; 
     public positionTypeId:number; 
     public isInternalResourceId:number; 
     public identifiedResourceId:number;  

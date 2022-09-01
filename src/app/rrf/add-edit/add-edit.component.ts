@@ -114,13 +114,17 @@ export class AddEditComponent implements OnInit {
   }
 
   arrayToString(array:string[]){
-    return array.toString();
+   // return JSON.stringify(array);
+   return array.toString();
   }
 
   SaveRRFRecordDetails(){
     
     const data = this.RRFForm.getRawValue();
-    data.mandatorySkills = this.arrayToString(data.mandatorySkills); 
+    const mandatorySkills =  JSON.stringify(data.MandatorySkills)
+
+    data.MandatorySkills = this.arrayToString(data.MandatorySkills);
+    data.NiceToHaveSkills = this.arrayToString(data.NiceToHaveSkills); 
     
     this._employeeService.SaveDetails(data).subscribe(Result => {
       
