@@ -44,8 +44,8 @@ export class RRF{
     public approvedByResourceId:number; 
     public primaryTechnologies:string; 
     public minimumYearsOfExperienceId:number;
-    public mandatorySkills:string;
-    public niceToHaveSkills:string;
+    public mandatorySkills:string[];
+    public niceToHaveSkills:string[];
     public jobLocation:string;
     public isRemotelyId:number;
     public interviewByResourceId: number;
@@ -85,8 +85,8 @@ export class RRF{
         this.approvedByResourceId=rrf?.approvedByResourceId|| 0;
         this.primaryTechnologies=rrf?.primaryTechnologies|| '';
         this.minimumYearsOfExperienceId=rrf?.minimumYearsOfExperienceId|| 0;
-        this.mandatorySkills=rrf?.mandatorySkills|| '';
-        this.niceToHaveSkills=rrf?.niceToHaveSkills|| '';
+        this.mandatorySkills=rrf?.mandatorySkills|| [''];
+        this.niceToHaveSkills=rrf?.niceToHaveSkills|| [''];
         this.jobLocation=rrf?.jobLocation|| '';
         this.isRemotelyId=rrf?.isRemotelyId|| 0;
         this.interviewByResourceId=rrf?.interviewByResourceId|| 0;

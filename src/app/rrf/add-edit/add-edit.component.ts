@@ -81,7 +81,7 @@ export class AddEditComponent implements OnInit {
       ApprovedByResourceId:[this.rrf.approvedByResourceId], 
       PrimaryTechnologies:[this.rrf.primaryTechnologies],
       MinimumYearsOfExperienceId:[this.rrf.minimumYearsOfExperienceId],
-      MandatorySkills:[this.rrf.mandatorySkills],
+        MandatorySkills:[this.rrf.mandatorySkills],
       NiceToHaveSkills:[this.rrf.niceToHaveSkills],
       JobLocation:[this.rrf.jobLocation],
       IsRemotelyId:[this.rrf.isRemotelyId],
@@ -99,9 +99,17 @@ export class AddEditComponent implements OnInit {
       }
       else {
         this.rrf = new RRF(Result);
+
+        this.rrf.mandatorySkills = this.stringToArray(Result.mandatorySkills.toString())
+        this.rrf.niceToHaveSkills = this.stringToArray(Result.niceToHaveSkills.toString())
+        this.RRFForm = this.createForm();
+        if(this.rrf.projectId)
+        {
+          this.getProjectDDL();
+        }
       }
       // Hide the splash screen
-      this.RRFForm = this.createForm();
+      
     });
   }
 
